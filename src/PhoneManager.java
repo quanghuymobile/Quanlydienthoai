@@ -1,3 +1,5 @@
+import java.nio.channels.ScatteringByteChannel;
+import java.security.KeyStore;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -118,10 +120,30 @@ public class PhoneManager {
         // LOGIC XÓA (Sử dụng lệnh DELETE WHERE)
     }
 
-    public void capNhatThongTin(Scanner scanner) {
-        System.out.print("Nhập tên điện thoại muốn cập nhật: ");
-        String tenCapNhat = scanner.nextLine();
-        // LOGIC CẬP NHẬT (Sử dụng lệnh UPDATE SET WHERE)
+    public void capNhatThongTin(Phone phone) {
+        String sql = "UPDATE Phone SET hangSanXuat = ?, gia = ? WHERE ten = ?";
+        try(Connection con = DriverManager.getConnection(DB_URL,DB_USER,DB_PASS);
+      PreparedStatement ps = con.prepareStatement(sql)){
+
+          ps.setString(1, phone.hangSanXuat);
+            ps.setDouble(2, phone.gia);
+            ps.setString(3,phone.ten);
+            int row=ps.executeUpdate();
+            if (row > 0) {
+                // Kiểm tra thành công
+                System.out.println("Cập nhật thành công thông tin điện thoại: " + phone.ten);
+            } else {
+                // Kiểm tra thất bại (Không tìm thấy bản ghi)
+                System.out.println(" Không tìm thấy điện thoại có tên '" + phone.ten + "' để cập nhật.");
+            }
+      }
+        catch (SQLException e) {
+            System.out.println("Lỗi CSDL khi xóa điện thoại: " + e.getMessage());
+
+        }
+
+
+
     }
 
     public void sapXepTheoGiaTang() {
@@ -133,5 +155,29 @@ public class PhoneManager {
     public void sapXepTheoGiaGiam() {
         // Cần viết lại câu lệnh SELECT ORDER BY Gia DESC
         System.out.println("Cần viết lại logic SELECT ORDER BY Gia DESC.");
+    }
+    public void Themnguoimua(Nguoimua nguoimua){
+        String sql = "INSERT INTO Nguoimua (Ten,SDT) VALUES (?, ?)";
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+             PreparedStatement ps=conn.prepareStatement(sql))
+
+        {
+                ps.setString(1, nguoimua.getTen());
+                ps.setString(2,nguoimua.getSDT());
+                int row = ps.executeUpdate();
+                if(row>0){
+                    System.out.println("Đã thêm thành công ");
+                }
+                else {
+                    System.out.println("Không thể thêm ");
+                }
+
+
+        }
+ catch (SQLException e) {
+            System.out.println("Lỗi CSDL khi xóa điện thoại: " + e.getMessage());
+
+        }
+
     }
 }
