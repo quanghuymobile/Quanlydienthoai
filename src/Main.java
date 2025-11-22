@@ -3,145 +3,153 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         PhoneManager manager = new PhoneManager();
-
-
+        System.out.println("1.Trinh quan ly dien thoai ");
+        System.out.println("2.Thoat");
         Scanner input = new Scanner(System.in);
-        System.out.println("Chào mừng bạn đến với chương trình quản lý cửa hàng điện thoại!");
-        hienThiMenu();
-        int choice = input.nextInt();
-        input.nextLine();
-        while (choice < 1 || choice > 8) {
-            System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập lại: ");
-            choice = input.nextInt();
+        int t = input.nextInt();
+        if (t == 1) {
+            System.out.println("Chào mừng bạn đến với chương trình quản lý cửa hàng điện thoại!");
+            hienThiMenu();
+            int choice = input.nextInt();
             input.nextLine();
+            while (choice < 1 || choice > 8) {
+                System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập lại: ");
+                choice = input.nextInt();
+                input.nextLine();
 
-        }
-        while (choice >= 1 && choice <= 8) {
+            }
+            while (choice >= 1 && choice <= 8) {
 
-            switch (choice) {
-                case 1:
-                    System.out.println("THêm điện thoại");
-                    System.out.println("Nhap ten ");
-                    String ten = input.nextLine();
-                    System.out.println("Nhâập haãng sản xuaâts");
-                    String hangSanXuat = input.nextLine();
-                    System.out.println("Nhập gia ");
-                    Double gia = input.nextDouble();
-                    Phone phone = new Phone(ten, hangSanXuat, gia);
+                switch (choice) {
+                    case 1:
+                        System.out.println("THêm điện thoại");
+                        System.out.println("Nhap ten ");
+                        String ten = input.nextLine();
+                        System.out.println("Nhâập haãng sản xuaâts");
+                        String hangSanXuat = input.nextLine();
+                        System.out.println("Nhập gia ");
+                        Double gia = input.nextDouble();
+                        Phone phone = new Phone(ten, hangSanXuat, gia);
 
-                    manager.themDienThoai(phone);
-                    hienThiMenu();
+                        manager.themDienThoai(phone);
+                        hienThiMenu();
 
-                    while (choice < 1 || choice > 8) {
-                        System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập lại: ");
-                        choice = input.nextInt();
-                        input.nextLine();
+                        while (choice < 1 || choice > 8) {
+                            System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập lại: ");
+                            choice = input.nextInt();
+                            input.nextLine();
 
-                    }
-                    break;
-                case 2:
-                    System.out.println("Hiển thị danh sách điện thoại");
-                    manager.hienThiTatCa();
-                    hienThiMenu();
+                        }
+                        break;
+                    case 2:
+                        System.out.println("Hiển thị danh sách điện thoại");
+                        manager.hienThiTatCa();
+                        hienThiMenu();
 
-                    while (choice < 1 || choice > 8) {
-                        System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập lại: ");
-                        choice = input.nextInt();
-                        input.nextLine();
+                        while (choice < 1 || choice > 8) {
+                            System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập lại: ");
+                            choice = input.nextInt();
+                            input.nextLine();
 
-                    }
-                    break;
-                case 3:
-                    System.out.println("Tìm kiếm điện thoại theo tên");
-                    hienThiMenu();
+                        }
+                        break;
+                    case 3:
+                        System.out.println("Tìm kiếm điện thoại theo tên");
+                        hienThiMenu();
 
-                    while (choice < 1 || choice > 8) {
-                        System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập lại: ");
-                        choice = input.nextInt();
-                        input.nextLine();
 
-                    }
-                    break;
-                case 4:
+                        manager.timKiemTheoTen();
+
+                        while (choice < 1 || choice > 8) {
+                            System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập lại: ");
+                            choice = input.nextInt();
+                            input.nextLine();
+
+                        }
+                        break;
+                    case 4:
 //                    System.out.println("Xoá điện thoại theo tên");
-                    System.out.println("Xóa Điện Thoại");
-                    System.out.print("Nhập tên điện thoại muốn xóa: ");
-                    String tenXoa = input.nextLine();
-                    manager.xoaDienThoai(tenXoa);
-                    hienThiMenu();
+                        System.out.println("Xóa Điện Thoại");
+                        System.out.print("Nhập tên điện thoại muốn xóa: ");
+                        String tenXoa = input.nextLine();
+                        manager.xoaDienThoai(tenXoa);
+                        hienThiMenu();
 
-                    while (choice < 1 || choice > 8) {
-                        System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập lại: ");
-                        choice = input.nextInt();
-                        input.nextLine();
+                        while (choice < 1 || choice > 8) {
+                            System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập lại: ");
+                            choice = input.nextInt();
+                            input.nextLine();
 
-                    }
-                    break;
-                case 5:
-                    System.out.println("Cập nhật thông tin điện thoại theo tên");
-
-                    System.out.print("Nhập tên điện thoại muốn cập nhật: ");
-                    manager.hienThiTatCa();
-                    System.out.println("Nhap ten san pham can sua ");
-                     ten = input.nextLine();
-                    System.out.println("Nhập tên hang san xuat ");
-                    hangSanXuat=input.nextLine();
-                    System.out.println("Nhap gia san pham ");
-                    gia= input.nextDouble();
-                    phone =new Phone(ten,hangSanXuat,gia);
-                    manager.capNhatThongTin(phone);
+                        }
+                        break;
+                    case 5:
+                        System.out.println("Cập nhật thông tin điện thoại theo tên");
+                        manager.hienThiTatCa();
+                        System.out.println("Nhap ten san pham can sua ");
+                        ten = input.nextLine();
+                        System.out.printf("Nhập tên hang san xuat ");
+                        hangSanXuat = input.nextLine();
+                        System.out.println("Nhap gia san pham ");
+                        gia = input.nextDouble();
+                        phone = new Phone(ten, hangSanXuat, gia);
+                        manager.capNhatThongTin(phone);
 
 
-                    hienThiMenu();
+                        hienThiMenu();
 
 
-                    while (choice < 1 || choice > 8) {
-                        System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập lại: ");
-                        choice = input.nextInt();
-                        input.nextLine();
+                        while (choice < 1 || choice > 8) {
+                            System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập lại: ");
+                            choice = input.nextInt();
+                            input.nextLine();
 
-                    }
-                    break;
-                case 6:
-                    System.out.println("Sắp xếp điện thoại theo giá (tăng dần)");
+                        }
+                        break;
+                    case 6:
+                        System.out.println("Sắp xếp điện thoại theo giá (tăng dần)");
+manager.sapXepTheoGiaTang();
+                        hienThiMenu();
 
-                    hienThiMenu();
+                        while (choice < 1 || choice > 8) {
+                            System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập lại: ");
+                            choice = input.nextInt();
+                            input.nextLine();
 
-                    while (choice < 1 || choice > 8) {
-                        System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập lại: ");
-                        choice = input.nextInt();
-                        input.nextLine();
+                        }
+                        break;
+                    case 7:
+                        System.out.println("Sắp xếp điện thoại theo giá (giam dần)");
 
-                    }
-                    break;
-                case 7:
-                    System.out.println("Sắp xếp điện thoại theo giá (giam dần)");
+                        hienThiMenu();
+                        while (choice < 1 || choice > 8) {
+                            System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập lại: ");
+                            choice = input.nextInt();
+                            input.nextLine();
 
-                    hienThiMenu();
-                    while (choice < 1 || choice > 8) {
-                        System.out.println("Lựa chọn không hợp lệ! Vui lòng nhập lại: ");
-                        choice = input.nextInt();
-                        input.nextLine();
+                        }
+                        break;
+                    case 8:
+                        System.out.println("Thêm người dùng");
+                        System.out.println("Nhập tên người dùng ");
+                        String Ten = input.nextLine();
+                        System.out.println("Nhập sđt người dùng ");
+                        String SDT = input.nextLine();
+                        Nguoimua nguoimua = new Nguoimua(Ten, SDT);
+                        manager.Themnguoimua(nguoimua);
+                    case 9:
+                        System.out.println("Thoát chương trình");
+                        System.exit(0);
+                        break;
+                }
 
-                    }
-                    break;
-                case 8:
-                    System.out.println("Thêm người dùng");
-                    System.out.println("Nhập tên người dùng ");
-                    String Ten = input.nextLine();
-                    System.out.println("Nhập sđt người dùng ");
-                    String SDT = input.nextLine();
-                    Nguoimua nguoimua = new Nguoimua(Ten,SDT);
-                    manager.Themnguoimua(nguoimua);
-                case 9:
-                    System.out.println("Thoát chương trình");
-                    System.exit(0);
-                    break;
+                choice = input.nextInt();
+                input.nextLine();
+
+
             }
 
-            choice = input.nextInt();
-            input.nextLine();
-
+        } else {
+            System.exit(0);
 
         }
 
