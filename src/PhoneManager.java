@@ -45,9 +45,9 @@ public class PhoneManager {
                     pstmt.setString(2, phone.getHangSanXuat());
                     pstmt.setDouble(3, phone.getGia());
 
-                    int rowsAffected = pstmt.executeUpdate();
+                    int row = pstmt.executeUpdate();
 
-                    if (rowsAffected > 0) {
+                    if (row > 0) {
                         System.out.println(" Đã thêm điện thoại " + phone.getTen() + " vào CSDL thành công!");
                     } else {
                         System.out.println(" Lỗi: Không thể thêm điện thoại vào CSDL.");
@@ -83,7 +83,6 @@ public class PhoneManager {
             if (!found) {
                 System.out.println("Danh sách điện thoại trong CSDL hiện đang trống.");
             }
-            System.out.println("------------------------------------\n");
 
         } catch (SQLException e) {
             System.out.println("Lỗi kết nối hoặc truy vấn CSDL: Vui lòng kiểm tra Driver, URL, User/Pass và Database 'qldt' đã được tạo chưa.");
@@ -97,9 +96,25 @@ public class PhoneManager {
         // LOGIC TÌM KIẾM (Sử dụng lệnh SELECT WHERE LIKE)
     }
 
-    public void xoaDienThoai(Scanner scanner) {
-        System.out.print("Nhập tên điện thoại muốn xóa: ");
-        String tenXoa = scanner.nextLine();
+    public void xoaDienThoai(String tenXoa) {
+        String sql="DELETE FROM Phone WHERE Ten = ?";
+//        System.out.println("Xóa Điện Thoại");
+//        System.out.print("Nhập tên điện thoại muốn xóa: ");
+//        tenXoa = scanner.nextLine();
+        try(Connection conn=DriverManager.getConnection(DB_URL,DB_USER,DB_PASS);
+        PreparedStatement ps=conn.prepareStatement(sql)){
+            ps.setString(1,tenXoa);;
+            int row=ps.executeUpdate();
+            if(row>0){
+                System.out.println("Xoa dien thoai thanh cong "+tenXoa);
+            }else {
+                System.out.println("Khong tim thay dien thoai ");
+            }
+        } catch (SQLException e) {
+            System.out.println("Lỗi CSDL khi xóa điện thoại: " + e.getMessage());
+
+        }
+
         // LOGIC XÓA (Sử dụng lệnh DELETE WHERE)
     }
 

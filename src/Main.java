@@ -63,7 +63,11 @@ manager.themDienThoai(phone);
                     }
                     break;
                 case 4:
-                    System.out.println("Xoá điện thoại theo tên");
+//                    System.out.println("Xoá điện thoại theo tên");
+                    System.out.println("Xóa Điện Thoại");
+                    System.out.print("Nhập tên điện thoại muốn xóa: ");
+                    String tenXoa=input.nextLine();
+                    manager.xoaDienThoai(tenXoa);
                     hienThiMenu();
 
                     while (choice <1 || choice >8) {
